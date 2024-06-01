@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import TodoForm from "./TodoForm";
 import { RiCloseCircleLine } from "react-icons/ri";
 import { TiEdit } from "react-icons/ti";
 import { FaRegCircle } from "react-icons/fa";
@@ -10,38 +9,56 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
     name: "",
   });
 
-  const submitUpdate = (newTodo) => {
-    updateTodo(edit.id, newTodo.text);
-    setEdit({
-      id: null,
-      name: "",
-    });
+  const handleEditChange = (e) => {
+    setEdit({ ...edit, text: e.target.value });
   };
 
-  if (edit.id) {
-    return <TodoForm edit={edit} onSubmit={submitUpdate} />;
-  }
+  const handleEditKeyPress = (e, todoId) => {
+    if (e.key === "Enter") {
+      updateTodo(todoId, edit.text);
+      setEdit({ id: null, text: "" });
+    }
+  };
+
   return todos.map((todo, index) => (
     <div
       className={todo.isComplete ? "todo-row complete" : "todo-row"}
       key={index}
     >
-      <div>
+      <div className="todo__titlebox">
         <FaRegCircle
-          className="category-icon"
+          className="todo__icon"
+          style={{
+            color:
+              todo.category === "business"
+                ? "rgb(3, 120, 254)"
+                : todo.category === "personal"
+                ? "rgb(246, 12, 242)"
+                : "inherit",
+          }}
           onClick={() => completeTodo(todo.id)}
         />
+        <div key={todo.id} className="todo__titlebox__input-wrapper">
+          {edit.id === todo.id ? (
+            <input
+              type="text"
+              value={edit.text}
+              onChange={handleEditChange}
+              onKeyPress={(e) => handleEditKeyPress(e, todo.id)}
+            />
+          ) : (
+            todo.text
+          )}
+        </div>
       </div>
-      <div key={todo.id} onClick={() => completeTodo(todo.id)}>
-        {todo.text}
-      </div>
-      <div className="icons">
+
+      <div className="todo__iconbox">
         <TiEdit
-          className="edit-icon"
-          onClick={() => setEdit({ id: todo.id, name: todo.text })}
+          className="todo__icon"
+          onClick={() => setEdit({ id: todo.id, text: todo.text })}
         />
         <RiCloseCircleLine
-          className="delete-icon"
+          className="todo__icon"
           onClick={() => removeTodo(todo.id)}
         />
       </div>

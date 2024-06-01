@@ -10,7 +10,7 @@ function TodoForm(props) {
 
   useEffect(() => {
     inputRef.current.focus();
-  });
+  }, []);
 
   useEffect(() => {
     if (props.edit) {
@@ -49,29 +49,33 @@ function TodoForm(props) {
         }}
         ref={inputRef}
       />
-      <div>
-        <input
-          type="radio"
-          id="business"
-          name="todo__category"
-          value="business"
-          onChange={(e) => {
-            setCategory(e.target.value);
-          }}
-          checked={category === "business"}
-        />
-        <label htmlFor="business">Business</label>
-        <input
-          type="radio"
-          id="personal"
-          name="todo__category"
-          value="personal"
-          onChange={(e) => {
-            setCategory(e.target.value);
-          }}
-          checked={category === "personal"}
-        />
-        <label htmlFor="personal">Personal</label>
+      <div className="todo__input__radiobox">
+        <div className="todo__input__radiobox-item">
+          <input
+            type="radio"
+            id="business"
+            name="todo__category"
+            value="business"
+            onChange={(e) => {
+              setCategory(e.target.value);
+            }}
+            checked={category === "business"}
+          />
+          <label htmlFor="business">Business</label>
+        </div>
+        <div className="todo__input__radiobox-item">
+          <input
+            type="radio"
+            id="personal"
+            name="todo__category"
+            value="personal"
+            onChange={(e) => {
+              setCategory(e.target.value);
+            }}
+            checked={category === "personal"}
+          />
+          <label htmlFor="personal">Personal</label>
+        </div>
       </div>
       <button className="todo__button">Add todo</button>
     </form>

@@ -1,0 +1,176 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: rgb(238, 234, 231);
+}
+
+.todo__app {
+  max-width: 800px;
+  width: 100%;
+  margin: 2rem auto;
+}
+
+h1 {
+  margin: 1.5rem 0;
+  color: #01017a;
+  font-size: 1.5rem;
+}
+
+.complete {
+  text-decoration: line-through;
+}
+
+.main__content {
+  margin: 0 1rem;
+}
+
+.todo__form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.todo__input {
+  padding: 1rem 2rem 1rem 1rem;
+  border-radius: 0.5rem;
+  border: 2px solid rgb(3, 120, 254);
+  outline: none;
+  background: transparent;
+  width: 100%;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+.todo__input::placeholder {
+  color: #01017a;
+}
+
+.todo__input__radiobox {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+
+.todo__input__radiobox-item {
+  display: flex;
+  flex-direction: column;
+  width: 48%;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 1.8rem 0;
+  box-shadow: 0px 6px 12px -3px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  color: #01017a;
+}
+
+.todo__input__radiobox-item:hover {
+  opacity: 0.8;
+}
+
+input[type="radio"] {
+  cursor: pointer;
+  width: 1.5rem;
+  aspect-ratio: 1;
+}
+
+#business {
+  accent-color: rgb(3, 120, 254);
+}
+
+#personal {
+  accent-color: rgb(246, 12, 242);
+}
+
+.todo__button {
+  padding: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  outline: none;
+  background-color: rgb(3, 120, 254);
+  color: white;
+  text-transform: capitalize;
+  font-size: 1rem;
+}
+
+.todo__button:hover {
+  opacity: 0.8;
+}
+
+.todo__container {
+  padding: 0.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.todo-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.4rem;
+  align-items: center;
+  margin: 0.25rem auto;
+  color: #01017a;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.325rem;
+  width: 100%;
+}
+
+.todo__titlebox {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.todo__titlebox__input-wrapper {
+  width: 100%;
+}
+
+.todo__titlebox input {
+  outline: none;
+  border: none;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 1rem;
+  color: grey;
+}
+
+.todo__iconbox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  color: #01017a;
+}
+
+.todo__icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.todo__icon:hover {
+  opacity: 0.6;
+}
