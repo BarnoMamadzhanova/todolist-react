@@ -7,13 +7,18 @@ function TodoForm(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // props.onSubmit({
-    //   id: Math.floor(Math.random() * 10000),
-    //   text: input,
-    //   category: category,
-    // });
+    if (!input || !category) {
+      return;
+    }
+
+    props.onSubmit({
+      id: Math.floor(Math.random() * 10000),
+      text: input,
+      category: category,
+    });
 
     setInput("");
+    setCategory("");
   };
 
   return (
@@ -28,26 +33,30 @@ function TodoForm(props) {
           setInput(e.target.value);
         }}
       />
-      <input
-        type="radio"
-        id="business"
-        name="todo__category"
-        value={category}
-        onChange={(e) => {
-          setCategory(e.target.value);
-        }}
-      />
-      <label for="business">Business</label>
-      <input
-        type="radio"
-        id="personal"
-        name="todo__category"
-        value={category}
-        onChange={(e) => {
-          setCategory(e.target.value);
-        }}
-      />
-      <label for="personal">Personal</label>
+      <div>
+        <input
+          type="radio"
+          id="business"
+          name="todo__category"
+          value="business"
+          onChange={(e) => {
+            setCategory(e.target.value);
+          }}
+          checked={category === "business"}
+        />
+        <label htmlFor="business">Business</label>
+        <input
+          type="radio"
+          id="personal"
+          name="todo__category"
+          value="personal"
+          onChange={(e) => {
+            setCategory(e.target.value);
+          }}
+          checked={category === "personal"}
+        />
+        <label htmlFor="personal">Personal</label>
+      </div>
       <button className="todo__button">Add todo</button>
     </form>
   );
