@@ -1,8 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function TodoForm(props) {
-  const [input, setInput] = useState("");
-  const [category, setCategory] = useState("");
+  const [input, setInput] = useState(props.edit ? props.edit.text : "");
+  const [category, setCategory] = useState(
+    props.edit ? props.edit.category : ""
+  );
+
+  useEffect(() => {
+    if (props.edit) {
+      setInput(props.edit.text);
+      setCategory(props.edit.category);
+    }
+  }, [props.edit]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,7 +21,7 @@ function TodoForm(props) {
     }
 
     props.onSubmit({
-      id: Math.floor(Math.random() * 10000),
+      id: props.edit ? props.edit.id : Math.floor(Math.random() * 10000),
       text: input,
       category: category,
     });
