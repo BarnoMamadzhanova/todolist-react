@@ -1,10 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 function TodoForm(props) {
   const [input, setInput] = useState(props.edit ? props.edit.text : "");
   const [category, setCategory] = useState(
     props.edit ? props.edit.category : ""
   );
+
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    inputRef.current.focus();
+  });
 
   useEffect(() => {
     if (props.edit) {
@@ -41,6 +47,7 @@ function TodoForm(props) {
         onChange={(e) => {
           setInput(e.target.value);
         }}
+        ref={inputRef}
       />
       <div>
         <input
