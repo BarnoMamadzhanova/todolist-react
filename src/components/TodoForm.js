@@ -50,7 +50,7 @@ function TodoForm(props) {
         ref={inputRef}
       />
       <div className="todo__input__radiobox">
-        <div className="todo__input__radiobox-item">
+        <div className="todo__input__radiobox-item item--business">
           <input
             type="radio"
             id="business"
@@ -63,7 +63,7 @@ function TodoForm(props) {
           />
           <label htmlFor="business">Business</label>
         </div>
-        <div className="todo__input__radiobox-item">
+        <div className="todo__input__radiobox-item item--personal">
           <input
             type="radio"
             id="personal"
