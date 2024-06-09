@@ -1,63 +1,69 @@
 import React, { useState } from "react";
-import TodoForm from "./TodoForm";
-import Todo from "./Todo";
+import { RiCloseCircleLine } from "react-icons/ri";
+import { TiEdit } from "react-icons/ti";
+import { FaRegCircle } from "react-icons/fa";
 
-function TodoList() {
-  const [todos, setTodos] = useState([]);
+function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
+  const [edit, setEdit] = useState({
+    id: null,
+    text: "",
+  });
 
-  const addTodo = (todo) => {
-    if (!todo.text || !todo.category || /^\s*$/.test(todo.text)) {
-      return;
+  const handleEditChange = (e) => {
+    setEdit({ ...edit, text: e.target.value });
+  };
+
+  const handleEditKeyPress = (e, todoId) => {
+    if (e.key === "Enter") {
+      updateTodo(todoId, edit.text);
+      setEdit({ id: null, text: "" });
     }
-
-    const newTodos = [...todos, todo];
-
-    setTodos(newTodos);
   };
 
-  const updateTodo = (todoId, newText) => {
-    if (!newText || /^\s*$/.test(newText)) {
-      return;
-    }
+  return todos.map((todo, index) => (
+    <div
+      className={todo.isComplete ? "todo-row complete" : "todo-row"}
+      key={index}
+    >
+      <div className="todo__titlebox">
+        <FaRegCircle
+          className="todo__icon"
+          style={{
+            color:
+              todo.category === "business"
+                ? "rgb(3, 120, 254)"
+                : todo.category === "personal"
+                ? "rgb(246, 12, 242)"
+                : "inherit",
+          }}
+          onClick={() => completeTodo(todo.id)}
+        />
+        <div key={todo.id} className="todo__titlebox__input-wrapper">
+          {edit.id === todo.id ? (
+            <input
+              type="text"
+              value={edit.text}
+              onChange={handleEditChange}
+              onKeyPress={(e) => handleEditKeyPress(e, todo.id)}
+            />
+          ) : (
+            todo.text
+          )}
+        </div>
+      </div>
 
-    setTodos((prev) =>
-      prev.map((item) =>
-        item.id === todoId ? { ...item, text: newText } : item
-      )
-    );
-  };
-
-  const removeTodo = (id) => {
-    const removeArr = [...todos].filter((todo) => todo.id !== id);
-    setTodos(removeArr);
-  };
-
-  const completeTodo = (id) => {
-    let completedTodos = todos.map((todo) => {
-      if (todo.id === id) {
-        todo.isComplete = !todo.isComplete;
-      }
-      return todo;
-    });
-    setTodos(completedTodos);
-  };
-
-  return (
-    <div className="main__content">
-      <h1>Create a todo</h1>
-      <TodoForm onSubmit={addTodo} />
-
-      <div className="todo__container">
-        <h1>Todo List</h1>
-        <Todo
-          todos={todos}
-          completeTodo={completeTodo}
-          removeTodo={removeTodo}
-          updateTodo={updateTodo}
+      <div className="todo__iconbox">
+        <TiEdit
+          className="todo__icon"
+          onClick={() => setEdit({ id: todo.id, text: todo.text })}
+        />
+        <RiCloseCircleLine
+          className="todo__icon"
+          onClick={() => removeTodo(todo.id)}
         />
       </div>
     </div>
-  );
+  ));
 }
 
-export default TodoList;
+export default Todo;
