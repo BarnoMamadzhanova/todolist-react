@@ -22,12 +22,16 @@ function TodoForm(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!input || !category) {
+    // Validate input and category
+    if (!input || /^\s*$/.test(input)) {
+      return;
+    }
+    if (!category) {
       return;
     }
 
     props.onSubmit({
-      id: props.edit ? props.edit.id : Math.floor(Math.random() * 10000),
+      id: props.edit ? props.edit.id : Date.now(),
       text: input,
       category: category,
     });
@@ -50,7 +54,11 @@ function TodoForm(props) {
         ref={inputRef}
       />
       <div className="todo__input__radiobox">
-        <div className="todo__input__radiobox-item item--business">
+        <label
+          htmlFor="business"
+          className="todo__input__radiobox-item item--business"
+        >
+          Business
           <input
             type="radio"
             id="business"
@@ -61,9 +69,12 @@ function TodoForm(props) {
             }}
             checked={category === "business"}
           />
-          <label htmlFor="business">Business</label>
-        </div>
-        <div className="todo__input__radiobox-item item--personal">
+        </label>
+        <label
+          htmlFor="personal"
+          className="todo__input__radiobox-item item--personal"
+        >
+          Personal
           <input
             type="radio"
             id="personal"
@@ -74,10 +85,11 @@ function TodoForm(props) {
             }}
             checked={category === "personal"}
           />
-          <label htmlFor="personal">Personal</label>
-        </div>
+        </label>
       </div>
-      <button className="todo__button">Add todo</button>
+      <button className="todo__button" onClick={handleSubmit}>
+        Add todo
+      </button>
     </form>
   );
 }

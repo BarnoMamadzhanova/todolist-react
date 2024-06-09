@@ -2,17 +2,13 @@ import React, { useState } from "react";
 import TodoForm from "./TodoForm";
 import Todo from "./Todo";
 
-function TodoList() {
+function MainPage() {
   const [todos, setTodos] = useState([]);
 
   const addTodo = (todo) => {
-    if (!todo.text || !todo.category || /^\s*$/.test(todo.text)) {
-      return;
-    }
-
-    const newTodos = [...todos, todo];
-
-    setTodos(newTodos);
+    setTodos((prev) => {
+      return [...prev, todo];
+    });
   };
 
   const updateTodo = (todoId, newText) => {
@@ -28,8 +24,9 @@ function TodoList() {
   };
 
   const removeTodo = (id) => {
-    const removeArr = [...todos].filter((todo) => todo.id !== id);
-    setTodos(removeArr);
+    setTodos((prev) => {
+      return prev.filter((todo) => todo.id !== id);
+    });
   };
 
   const completeTodo = (id) => {
@@ -60,4 +57,4 @@ function TodoList() {
   );
 }
 
-export default TodoList;
+export default MainPage;

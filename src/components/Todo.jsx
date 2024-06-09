@@ -32,9 +32,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo }) {
             color:
               todo.category === "business"
                 ? "rgb(3, 120, 254)"
-                : todo.category === "personal"
-                ? "rgb(246, 12, 242)"
-                : "inherit",
+                : "rgb(246, 12, 242)",
           }}
           onClick={() => completeTodo(todo.id)}
         />
